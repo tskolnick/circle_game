@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'bouncing_ball.dart'; // Import the BouncingBall widget
 import 'partial_circle.dart'; // Import the PartialCircle widget
+import 'rotate_button.dart'; // Import the RotateButton widget
 
 void main() => runApp(MyApp());
 
@@ -20,10 +21,27 @@ class MyApp extends StatelessWidget {
           color: Colors.white,
           child: Stack(
             children: [
+            
               Center(
                 child: PartialCircle(),
               ),
               BouncingBall(),
+            
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: RotateButton( 'left',)  
+                    ),
+                    Expanded(
+                      child: RotateButton( 'right',) 
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'event_bus.dart';
+import 'dart:async';
 
 class PartialCircle extends StatefulWidget {
   @override
@@ -8,6 +10,28 @@ class PartialCircle extends StatefulWidget {
 
 class _PartialCircleState extends State<PartialCircle> {
   double _angle = 0;
+  late StreamSubscription _subscription;
+
+  @override
+
+  void initState() {
+    super.initState();
+    var bus = EventBus();
+
+    _subscription = bus.eventStream.listen((event) {
+      if (event == 'left') {
+        rotateLeft();    
+      } else if (event == 'right') {
+        rotateRight();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
 
   void rotateLeft() {
     setState(() {

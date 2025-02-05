@@ -13,26 +13,23 @@ class Projectile extends CircleComponent with CollisionCallbacks, HasGameRef<Rot
     anchor: Anchor.center,
     position: Vector2(100, -300),
     radius: 50,
-    paint: Paint()..color = const Color(0xFFFFFFFF),
+    paint: Paint()..color = const Color(0x99FFFFFF),
   ){
     priority = 10;
     } 
 
-  Vector2 velocity =  Vector2(-2, 5) * 20; // (Vector2.random() - Vector2.random()) * 5;
+  Vector2 velocity =  (Vector2.random() - Vector2.random()).normalized() * 200;
   bool collided = false;
   Player? object_colided_with = null;
   CircleHitbox hitbox = CircleHitbox()       
-        ..debugColor = Colors.red
-        ..debugMode = true;
+       // ..debugColor = Colors.red
+        ..debugMode = false;
 
   
   @override
   Future<void> onLoad() async {
     await super.onLoad();
     hitbox.position = Vector2(100, -200);
-
- 
-
     add( hitbox );
   }
 
@@ -54,17 +51,16 @@ class Projectile extends CircleComponent with CollisionCallbacks, HasGameRef<Rot
   void update(double dt) {
     if (object_colided_with != null) {
 
-      print( 'collided' );
+      //print( 'collided' );
       Vector2 normal = (position - object_colided_with!.position).normalized();
 
       // Place the projectile on the edge of the player's circle
       position = object_colided_with!.position + normal * (object_colided_with!.radius + radius );
 
 
-      print( velocity );
       // Reflect the velocity vector based on the tangent
       velocity = velocity.reflected(normal);
-      print( "reflected  $velocity" );
+
  
       object_colided_with = null;
       //velocity = Vector2(0, 0);

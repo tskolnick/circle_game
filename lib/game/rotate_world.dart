@@ -13,7 +13,7 @@ class RotateWorld extends World with HasGameRef<RotateGame>, HasCollisionDetecti
 
       await add(player);
 
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 2; i++) {
       await add(Projectile());
     }
 

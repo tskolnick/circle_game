@@ -19,6 +19,6 @@ class RotateGame extends FlameGame with SingleGameInstance, HasCollisionDetectio
 
   @override
   Color backgroundColor() {
-  return Colors.green;
+  return const Color.fromARGB(255, 221, 156, 3);
   }
 }
